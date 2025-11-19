@@ -1,0 +1,15 @@
+# Example PySpark Job
+# This job runs a notebook from the Git repo (synced via Repos)
+# Uses serverless compute (no cluster management needed)
+
+resources:
+  jobs:
+    example_pyspark_job:
+      name: example-pyspark-job-dev
+      tasks:
+        - task_key: pyspark_example
+          notebook_task:
+            notebook_path: ${var.repo_path}/infrastructure/notebooks/example_pyspark_job.py
+          # Serverless compute - Databricks automatically provisions compute
+          # No cluster configuration needed for serverless
+      timeout_seconds: 1800

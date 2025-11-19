@@ -1,0 +1,43 @@
+# Databricks Asset Bundle Configuration
+# This file defines ALL Databricks resources using YAML (version controlled in Git)
+# 
+# What this manages:
+# - SQL Warehouses (for dbt)
+# - Jobs (PySpark, dbt, etc.)
+#
+# Everything is version controlled in Git!
+
+bundle:
+  name: databricks_and_pulumi
+
+# Include resource definitions from resources/ directory
+include:
+  - resources/*.yml
+  - resources/*/*.yml
+
+# Variable declarations
+variables:
+  repo_path:
+    description: Path to Git repo in Databricks
+
+targets:
+  default:
+    mode: development
+    default: true
+    # Workspace host: Uses Databricks CLI profile by default
+    # Set via: databricks configure --token
+    # Or set DATABRICKS_HOST environment variable before running commands
+    # Note: Workspace host URL is not a secret, but token is (handled by CLI)
+    workspace:
+      # If not set, uses CLI profile from `databricks configure --token`
+      # For CI/CD, set DATABRICKS_HOST environment variable
+      host: https://dbc-49df519f-3194.cloud.databricks.com
+    variables:
+      repo_path: /Repos/dev/databricks_and_pulumi
+  production:
+    mode: production
+    workspace:
+      # Set DATABRICKS_HOST_PROD env var or update this for prod workspace
+      host: https://your-prod-workspace.cloud.databricks.com
+    variables:
+      repo_path: /Repos/prod/databricks_and_pulumi
