@@ -1,0 +1,7 @@
+name: databricks-infrastructure
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Infrastructure as Code for Databricks using Pulumi
+
