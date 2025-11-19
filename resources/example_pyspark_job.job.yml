@@ -9,7 +9,7 @@ resources:
       tasks:
         - task_key: pyspark_example
           notebook_task:
-            notebook_path: ${var.repo_path}/infrastructure/notebooks/example_pyspark_job.py
+            notebook_path: ${var.repo_path}/notebooks/example_pyspark_job.py
           # Serverless compute - Databricks automatically provisions compute
           # No cluster configuration needed for serverless
       timeout_seconds: 1800

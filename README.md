@@ -8,8 +8,7 @@ Infrastructure as Code for Databricks using **Databricks Asset Bundles** - every
 Git Repository
 ├── databricks.yml          # SQL Warehouses + Jobs (YAML, version controlled)
 ├── resources/              # Job definitions (YAML, version controlled)
-├── infrastructure/
-│   └── notebooks/          # PySpark notebooks (version controlled)
+├── notebooks/              # PySpark notebooks (version controlled)
 └── dbt/                    # dbt project (version controlled)
      ↓ (synced via Databricks Repos)
 Databricks Workspace
@@ -65,7 +64,7 @@ databricks bundle deploy
 - ✅ All in Git (YAML files)
 
 ### Git (via Databricks Repos)
-- ✅ Notebooks (`infrastructure/notebooks/`)
+- ✅ Notebooks (`notebooks/`)
 - ✅ dbt project (`dbt/`)
 - ✅ All code version controlled in Git
 
@@ -84,9 +83,8 @@ databricks_and_pulumi/
 ├── databricks.yml              # Asset Bundles config
 ├── resources/                  # Resource definitions
 │   └── example_pyspark_job.job.yml
-├── infrastructure/
-│   └── notebooks/              # PySpark notebooks
-│       └── example_pyspark_job.py
+├── notebooks/                  # PySpark notebooks
+│   └── example_pyspark_job.py
 └── dbt/                        # dbt project (create this)
     ├── dbt_project.yml
     ├── profiles.yml
@@ -105,7 +103,7 @@ resources:
       tasks:
         - task_key: run_notebook
           notebook_task:
-            notebook_path: ${var.repo_path}/infrastructure/notebooks/my_notebook.py
+            notebook_path: ${var.repo_path}/notebooks/my_notebook.py
           # Serverless compute - no cluster config needed
       timeout_seconds: 1800
 ```
